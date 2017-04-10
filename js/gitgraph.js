@@ -622,9 +622,9 @@
 
   /**
    * Branch commit options
-   * 
+   *
    * @typedef {object} BranchCommitOptions
-   * 
+   *
    * @property {string} [color] - Master color (dot & message)
    * @property {string} [author = this.parent.author] - Author name & email
    * @property {string} [date] - Date of commit, default is now
@@ -1083,7 +1083,7 @@
     this.date = options.date || new Date().toUTCString();
     this.detail = options.detail || null;
     this.sha1 = options.sha1 || (Math.random(100)).toString(16).substring(3, 10);
-    this.message = options.message || "He doesn't like George Michael! Boooo!";
+    this.message = options.message || "";
     this.arrowDisplay = options.arrowDisplay;
     this.messageDisplay = _booleanOptionOr(options.messageDisplay, this.template.commit.message.display);
     this.messageAuthorDisplay = _booleanOptionOr(options.messageAuthorDisplay, this.template.commit.message.displayAuthor);
@@ -1198,9 +1198,15 @@
       }
     }
 
+    var message = this.message;
+
+    this.context.font = this.messageFont;
+    this.context.fillStyle = this.messageColor;
+    var textMeasurement = this.context.measureText(message);
+    this.context.fillText(message, this.x - (textMeasurement.width/2), this.y+6);
+
     // Message
     if (this.messageDisplay) {
-      var message = this.message;
       if (this.messageHashDisplay) {
         message = this.sha1 + " " + message;
       }
