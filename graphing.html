@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/gitgraph.css">
+		<!-- <link rel="stylesheet" href="css/theme/solarized.css"> -->
+	</head>
+	<body>
+
+			<canvas id="graph-example"></canvas>
+
+  		<script src="js/gitgraph.js"></script>
+      <script>
+			var named_graph = new GitGraph.Template({
+          branch: {
+            color: "#000000",
+            lineWidth: 4,
+            spacingX: 80,
+            mergeStyle: "straight",
+            labelRotation: 0
+						// showLabel: true
+          },
+					// mode: 'compact',
+          commit: {
+            // tag: {
+            //   spacingX: 80
+            // },
+            spacingY: -80,
+            dot: {
+              size: 14,
+              strokeColor: "#000000",
+              strokeWidth: 8
+            },
+            message: {
+              color: "black",
+							displayHash: true,
+							displayMessage: true
+            }
+          },
+          arrow: {
+            size: 14,
+            offset: 4
+          }
+			});
+
+			var git_graph_example = new GitGraph({
+				elementId: 'graph-example',
+				reverseArrow: true,
+				template: named_graph,
+				orientation: 'horizontal',
+				// mode: 'compact'
+			});
+
+			var master = git_graph_example.branch("master");
+			master.commit({tag: "Initial"}).commit();
+			var develop = master.branch("develop");
+			develop.commit();
+			master.commit().commit().commit();
+			develop.commit().commit();
+			master.commit();
+
+      </script>
+  </body>
+</html>

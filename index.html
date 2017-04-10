@@ -7,6 +7,8 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/gitgraph.css">
+
 		<link rel="stylesheet" href="css/theme/solarized.css">
 
 		<!-- Theme used for syntax highlighting of code -->
@@ -56,13 +58,28 @@
 				</section>
 
 				<section>
+					<h3>97f341d10392085d981353457def1f4dc06b9d93</h3>
+					<p>Every commit in <span class="git-color">Git</span> is identified by a sha1 hash.</p>
+					<p>For our purposes, we're going to refer to combits by letter names (A, B, C, etc)</p>
+				</section>
+
+				<section>
 					<section>
 						<h3>Graph Theory 101</h3>
 						<img src="img/graph-theory.png" style="background:none;border:none;box-shadow:none">
 					</section>
 					<section>
 						<h3><span class="git-color">Git</span> is a big graph</h3>
-						Every commit in a <span class="git-color">Git</span> repo can be thought of as a node in a graph (because they all are).
+						<p>Every commit in a <span class="git-color">Git</span> repo can be thought of as a node in a graph (because they all are).</p>
+						<!-- <img src="img/graph-example.png" style="background:none;border:none;box-shadow:none"> -->
+						<p style="overflow:hidden;height:10%"><canvas id="graph-example"></canvas></p>
+						<p>Commits reference their ancestors, not their descendents.</p>
+					</section>
+					<section>
+						<p>Parents commits are indicated by the direction of the edges.</p>
+						<img src="img/graph-example.png" style="background:none;border:none;box-shadow:none">
+					<section>
+						<p
 					</section>
 				</section>
 
@@ -77,12 +94,16 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-
+		<script src="js/gitgraph.js"></script>
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
-
+				// width: "100%",
+				// height: "100%",
+				margin: 0.2,
+				minScale: 1,
+				maxScale: 1,
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
@@ -90,6 +111,57 @@
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
+			});
+
+			var named_graph = new GitGraph.Template({
+          branch: {
+            color: "#000000",
+            lineWidth: 4,
+            spacingX: 80,
+            mergeStyle: "straight",
+            labelRotation: 0
+						// showLabel: true
+          },
+					mode: 'compact',
+          commit: {
+            spacingY: -80,
+            dot: {
+              size: 14,
+              strokeColor: "#000000",
+              strokeWidth: 8
+            },
+            message: {
+              color: "black",
+							displayHash: true,
+							displayMessage: true
+            }
+          },
+          arrow: {
+            size: 14,
+            offset: 4
+          }
+			});
+
+			Reveal.addEventListener( 'ready', function( event ) {
+				// Graph example
+				(function() {
+					var git_graph_example = new GitGraph({
+						elementId: 'graph-example',
+						reverseArrow: true,
+						template: named_graph,
+						orientation: 'horizontal',
+						// mode: 'compact'
+					});
+
+					var master = git_graph_example.branch("master");
+					master.commit().commit();
+					var develop = master.branch("develop");
+					develop.commit();
+					master.commit().commit().commit();
+					develop.commit();
+					master.commit();
+				}());
+
 			});
 		</script>
 	</body>
