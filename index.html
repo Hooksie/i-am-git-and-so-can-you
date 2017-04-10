@@ -117,9 +117,10 @@
             color: "#000000",
             lineWidth: 4,
             spacingX: 80,
-            mergeStyle: "bezier",
+            mergeStyle: "straight",
             labelRotation: 0,
-						showLabel: true
+						showLabel: true,
+						labelFont: "normal 16pt arial"
           },
 					mode: 'compact',
           commit: {
@@ -134,11 +135,41 @@
 							displayHash: true,
 							displayMessage: true,
 							font: "bold 14pt arial"
-            }
+            },
           },
           arrow: {
             size: 14,
-            offset: 4
+            offset: 3
+          }
+			});
+
+			var named_graph_bezier = new GitGraph.Template({
+          branch: {
+            color: "#000000",
+            lineWidth: 4,
+            spacingX: 80,
+            mergeStyle: "bezier",
+            labelRotation: 0,
+						showLabel: true,
+						labelFont: "normal 16pt arial"
+          },
+					mode: 'compact',
+          commit: {
+            spacingY: -75,
+            dot: {
+              size: 20,
+              strokeColor: "#000000",
+              strokeWidth: 8
+            },
+            message: {
+              color: "white",
+							displayHash: true,
+							displayMessage: true,
+							font: "bold 14pt arial"
+            },
+          },
+          arrow: {
+						active: false
           }
 			});
 
@@ -148,39 +179,43 @@
 					var git_graph_example = new GitGraph({
 						elementId: 'graph-example',
 						reverseArrow: true,
-						template: named_graph,
+						template: named_graph_bezier,
 						orientation: 'horizontal'
 						// mode: 'compact'
 					});
 
 					var master = git_graph_example.branch("master");
-					master.commit({message: "A"})
+					master.commit("A");
 					master.commit("B")
-					// var develop = master.branch("develop");
-					// develop.commit("C");
-					master.commit("D").commit("E").commit("F");
-					// develop.commit("G");
-					master.commit("H");
-				}());
-				// Parents example
-				(function() {
-					var git_graph_example = new GitGraph({
-						elementId: 'graph-example-parents',
-						reverseArrow: true,
-						template: named_graph,
-						orientation: 'horizontal'
-						// mode: 'compact'
-					});
-
-					var master = git_graph_example.branch("master");
-					master.commit({message: "A"}).commit("B");
 					var develop = master.branch("develop");
 					develop.commit("C");
 					master.commit("D").commit("E").commit("F");
 					develop.commit("G");
-					master.commit("H");
-					develop.merge(master, "I")
+					master.commit({message: "H", showLabel: true});
+					var feature = develop.branch("feature1")
+					feature.commit("I")
+					feature.commit({message: "J", showLabel: true})
+					feature.merge(develop, {message: "K", showLabel: true})
 				}());
+				// Parents example
+			// 	(function() {
+			// 		var git_graph_example = new GitGraph({
+			// 			elementId: 'graph-example-parents',
+			// 			reverseArrow: true,
+			// 			template: named_graph,
+			// 			orientation: 'horizontal'
+			// 			// mode: 'compact'
+			// 		});
+			//
+			// 		var master = git_graph_example.branch("master");
+			// 		master.commit({message: "A"}).commit("B");
+			// 		var develop = master.branch("develop");
+			// 		develop.commit("C");
+			// 		master.commit("D").commit("E").commit("F");
+			// 		develop.commit("G");
+			// 		master.commit("H");
+			// 		develop.merge(master, "I")
+			// 	}());
 			});
 		</script>
 	</body>

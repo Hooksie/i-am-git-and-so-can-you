@@ -750,7 +750,7 @@
     var isFirstBranch = !(options.parentCommit instanceof Commit);
     var isPathBeginning = this.path.length === 0;
 
-    options.showLabel = (isPathBeginning && this.showLabel);
+    options.showLabel = options.showLabel || false;
     if (options.showLabel) {
       options.x -= this.template.commit.spacingX;
       options.y -= this.template.commit.spacingY;
@@ -1133,7 +1133,7 @@
          * Take into account the dot size and the height of the label
          * (calculated from the font size) to arrive at the Y position.
          */
-        var yNegativeMargin = this.y - this.dotSize - _getFontHeight(this.labelFont);
+        var yNegativeMargin = (this.y - this.dotSize - _getFontHeight(this.labelFont));
         _drawTextBG(this.context,
           this.x,
           yNegativeMargin,
@@ -1652,7 +1652,7 @@
 
     if (useStroke) {
       context.beginPath();
-      context.rect(-(width / 2) - 4, -(height / 2) + 2, width + 8, height + 2);
+      context.rect(-(width / 2) - 4, -(height / 2) + 2, width + 8, height + 6);
       context.fillStyle = color;
       context.fill();
       context.lineWidth = 2;
