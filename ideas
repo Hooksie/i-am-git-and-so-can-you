@@ -1,0 +1,18 @@
+Advanced Git:
+
+Foreword: We'll be discussing advanced concepts here.
+This is not a beginner tutorial. If you know Git already, -> insightful.
+If you dont -> you'll leave confused.
+
+Git is a distributed SCM. Each repository contains the entire history of the project.
+
+A commit is a snapshot in time of your entire project.
+
+Git commits are inherently tied to one or more parent commits
+Git commits are immutable
+
+Back to Basics: The Commit
+
+Traditional VCSs store history as a series of diffs. Git diff -> snapshot.
+
+Rebasing and A'

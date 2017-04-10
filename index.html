@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<style>
+			.git-color {
+				color: #f05133;
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+					<img width="200" height="200" src='img/git-icon.png' style="background:none;border:none;box-shadow:none">
+					<h1>Advanced <span class="git-color">Git</span></h1>
+					<h3>Understanding the graph, commits and other mysteries you never knew you wanted to know</h3>
+					<h4><span class="git-color">Matt Hooks / Greg Bowser</span></h4>
+				</section>
+
+				<section>
+					<section>
+						<h3>Describe <span class="git-color">Git</span> using at least 3 buzzwords</h3>
+						<p><span class="git-color">Git</span> is an open source, distributed source control management tool,
+							designed to be fast, flexible, and secure.</p>
+					</section>
+					<section>
+						<h3>What is "distributed" SCM?</h3>
+						<p>Every checkout works independetly and contains the full history of the project.</p>
+					</section>
+					<section>
+						<h3>How is it "fast and flexible"?</h3>
+						<ul>
+							<li>Committing, branching and history are all local operations</li>
+							<li>Users and teams can independently define their own workflows</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Graph Theory 101</h3>
+						<img src="img/graph-theory.png" style="background:none;border:none;box-shadow:none">
+					</section>
+					<section>
+						<h3><span class="git-color">Git</span> is a big graph</h3>
+						Every commit in a <span class="git-color">Git</span> repo can be thought of as a node in a graph (because they all are).
+					</section>
+				</section>
+
+				<section>
+						<section>
+							<h3>The <span class="git-color">Git</span> Database</h3>
+							Commits, Trees and Blobs
+						</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
