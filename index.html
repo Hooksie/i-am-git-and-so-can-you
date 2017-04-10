@@ -65,20 +65,60 @@
 
 				<section>
 					<section>
-						<h3>Graph Theory 101</h3>
+						<h3><span class="git-color">Git</span> Graph Theory 101</h3>
 						<img src="img/graph-theory.png" style="background:none;border:none;box-shadow:none">
 					</section>
 					<section>
 						<h3><span class="git-color">Git</span> is a big graph</h3>
 						<p>Every commit in a <span class="git-color">Git</span> repo can be thought of as a node in a graph (because they all are).</p>
 						<p><canvas id="graph-example"></canvas></p>
-						<p>Commits reference their ancestors, not their descendents.</p>
 					</section>
 					<section>
-						<p>Parents commits are indicated by the direction of the edges.</p>
+						<h3>Specifically, a <em>Directed Acyclic Graph</em></h3>
 						<p><canvas id="graph-example-parents"></canvas></p>
+						<h4>Let's break that down...</h4>
+						<div class="fragment">
+							<dl>
+								<dt>directed</dt>
+								<dd>
+									Parents commits are indicated by the direction of the edges.
+								</dd>
+							</dl>
+						</div>
+						<div class="fragment">
+							<dl>
+								<dt>acyclic</dt>
+								<dd>
+									Commits reference their ancestors, not their descendents.
+								</dd>
+							</dl>
+						</div>
+					</section>
 					<section>
-						<p
+						<h3>Every time you commit, you add a new point to the graph, and that point references your last commit.</h3>
+						<img src="img/basic-commiting.png" style="padding:1em">
+					</section>
+					<section>
+						<h3>A branch is just a pointer to a commit</h3>
+						<!-- <p><canvas id="graph-example-branch"></canvas></p> -->
+						<img src="img/basic-branching-1.png" style="padding:1em">
+						<p><code>master</code> and <code>C6</code> are the exact same thing.
+					</section>
+					<section>
+						<h3>A merge is just a commit with multiple parents</h3>
+						<!-- <p><canvas id="graph-example-merge"></canvas></p> -->
+						<img src="img/basic-merging-2.png" style="padding:1em">
+						<p><code>master</code> (<code>C6</code>) has two parents.</p>
+					</section>
+					<section>
+						<h3>Why do I want abstract math in my version control?</h3>
+						<ul>
+							<li>Because commits are nodes on a graph, you can "move" those
+								nodes when you want to reorganize your work, and better
+								organize your patch before sharing it with the team.</li>
+							<li>When branches are just pointers, they can be created intantly,
+							which is great (assuming you like branches).</li>
+						</ul>
 					</section>
 				</section>
 
@@ -153,7 +193,6 @@
 						showLabel: true,
 						labelFont: "normal 16pt arial"
           },
-					mode: 'compact',
           commit: {
             spacingY: -75,
             dot: {
@@ -170,6 +209,38 @@
           },
           arrow: {
 						active: false
+          }
+			});
+
+			var named_graph_big = new GitGraph.Template({
+          branch: {
+            color: "#000000",
+            lineWidth: 6,
+            spacingX: 200,
+            mergeStyle: "straight",
+            labelRotation: 0,
+						showLabel: true,
+						labelFont: "normal 20pt arial"
+          },
+          commit: {
+            spacingY: -150,
+						color: "#f05133",
+            dot: {
+              size: 60,
+              strokeColor: "#000000",
+              strokeWidth: 10
+            },
+            message: {
+              color: "white",
+							displayHash: true,
+							displayMessage: true,
+							font: "bold 40pt arial"
+            },
+						widthExtension: -200
+          },
+          arrow: {
+            size: 30,
+            offset: 3
           }
 			});
 
@@ -198,25 +269,64 @@
 					feature.merge(develop, {message: "K", showLabel: true})
 				}());
 				// Parents example
-			// 	(function() {
-			// 		var git_graph_example = new GitGraph({
-			// 			elementId: 'graph-example-parents',
-			// 			reverseArrow: true,
-			// 			template: named_graph,
-			// 			orientation: 'horizontal'
-			// 			// mode: 'compact'
-			// 		});
-			//
-			// 		var master = git_graph_example.branch("master");
-			// 		master.commit({message: "A"}).commit("B");
-			// 		var develop = master.branch("develop");
-			// 		develop.commit("C");
-			// 		master.commit("D").commit("E").commit("F");
-			// 		develop.commit("G");
-			// 		master.commit("H");
-			// 		develop.merge(master, "I")
-			// 	}());
+				(function() {
+					var git_graph_example = new GitGraph({
+						elementId: 'graph-example-parents',
+						reverseArrow: true,
+						template: named_graph,
+						orientation: 'horizontal'
+						// mode: 'compact'
+					});
+
+					var master = git_graph_example.branch("master");
+					master.commit({message: "A"}).commit("B");
+					var develop = master.branch("develop");
+					develop.commit("C");
+					master.commit("D").commit("E").commit("F");
+					develop.commit("G");
+					master.commit("H");
+					develop.merge(master, "I");
+				}());
 			});
+			// Commits example
+			(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-commits',
+						reverseArrow: true,
+						template: named_graph_big,
+						orientation: 'horizontal',
+						mode: 'compact'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("C0").commit("C1").commit("C2").commit("C3");
+			}());
+			(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-branch',
+						reverseArrow: true,
+						template: named_graph_big,
+						orientation: 'horizontal',
+						mode: 'compact'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("C0").commit("C1").commit({message: "C2", showLabel: true});
+			}());
+			(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-merge',
+						reverseArrow: true,
+						template: named_graph_big,
+						orientation: 'horizontal'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("C0");
+					var development = master.branch("development");
+					development.commit("C1");
+					development.merge(master, {message: "C3", showLabel: true});
+			}());
 		</script>
 	</body>
 </html>

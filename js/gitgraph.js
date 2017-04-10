@@ -1203,7 +1203,7 @@
     this.context.font = this.messageFont;
     this.context.fillStyle = this.messageColor;
     var textMeasurement = this.context.measureText(message);
-    this.context.fillText(message, this.x - (textMeasurement.width/2), this.y+6);
+    this.context.fillText(message, this.x - (textMeasurement.width/2), this.y + (_getFontHeight(this.messageFont)*0.3));
 
     // Message
     if (this.messageDisplay) {
