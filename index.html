@@ -356,6 +356,25 @@ $ git rebase master
 						<h3>Where do the old commits go?</h3>
 						<p>Commits not pointed to by any refs are automatically hidden and eventually garbage collected.</p>
 					</section>
+					<section>
+						<h3>The special case</h3>
+						<p>Merging a direct decendent of your HEAD neither rebases nor
+							creates a new merge commit.</p>
+						<p><canvas id="graph-example-fast-forward-start"></canvas></p>
+							<!-- <img src="img/basic-branching-4.png" style="padding:1em"> -->
+					</section>
+					<section>
+						<h3>Fast-forward</h3>
+						<p>Instead, it simply updates the ref (by default).</p>
+						<p><canvas id="graph-example-fast-forward-end"></canvas></p>
+						<p>master has been <strong>fast-forwarded</strong> to feature1</p>
+							<!-- <img src="img/basic-branching-5.png" style="padding:1em"> -->
+					</section>
+					<section>
+						<p>Fast-forward <strong>only moves forward through linear history.</strong></p>
+						<p><canvas id="graph-example-fast-forward-impossible"></canvas></p>
+						<p>master cannot be fast forwarded to feature2</p>
+					</section>
 				</section>
 
 				<section>
@@ -368,6 +387,11 @@ $ git rebase master
 							and merges your local changes.</p>
 							<p><strong>git push</strong> simply pushes your graph, and updates
 								the remote refs to reflect your new commits.</p>
+					</section>
+					<section>
+						<p>All changes to the graph are done by addition.</p>
+						<p><strong>git commit</strong>, <strong>git commit --amend</strong>
+							both create <em>new</em> commits.</p>
 					</section>
 				</section>
 
@@ -681,6 +705,49 @@ git cherry-pick feature-branch
 					master.commit({message: "G", showLabel: true});
 					var feature = master.branch("feature1");
 					feature.commit("C'").commit("D'").commit({message: "F'", showLabel: true});
+				}());
+				(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-fast-forward-start',
+						reverseArrow: true,
+						template: named_graph_bezier,
+						orientation: 'horizontal'
+						// mode: 'compact'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("A").commit("B").commit({message: "C", showLabel: true});
+					var feature = master.branch("feature1");
+					feature.commit("D").commit("E").commit({message: "F", showLabel: true});
+				}());
+				(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-fast-forward-end',
+						reverseArrow: true,
+						template: named_graph_bezier,
+						orientation: 'horizontal'
+						// mode: 'compact'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("A").commit("B").commit("C");
+					var feature = master.branch("feature1");
+					feature.commit("D").commit("E").commit({message: "F", extra: "master", showLabel: true});
+				}());
+				(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-fast-forward-impossible',
+						reverseArrow: true,
+						template: named_graph_bezier,
+						orientation: 'horizontal'
+						// mode: 'compact'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("A").commit("B").commit("C");
+					var feature = master.branch("feature2");
+					feature.commit("D").commit("E").commit({message: "F", showLabel: true});
+					master.commit("G").commit({message: "H", showLabel: true});
 				}());
 			});
 		</script>

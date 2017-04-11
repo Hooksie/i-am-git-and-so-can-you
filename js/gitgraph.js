@@ -1107,6 +1107,8 @@
     this.labelFont = options.labelFont || this.template.branch.labelFont;
     _assignTagOptionsToCommit(this, options);
 
+    this.extra = options.extra;
+
     this.parent.commits.push(this);
   }
 
@@ -1152,6 +1154,19 @@
           this.template.branch.labelRotation,
           true);
       }
+
+      if (this.extra) {
+        var yNegativeMargin = (this.y - this.dotSize - _getFontHeight(this.labelFont)) - _getFontHeight(this.labelFont)*1.5;
+        _drawTextBG(this.context,
+          this.x,
+          yNegativeMargin,
+          this.extra,
+          this.labelColor,
+          this.labelFont,
+          this.template.branch.labelRotation,
+          true);
+      }
+
     }
 
     // Dot
