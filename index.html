@@ -286,6 +286,14 @@ $ git reset
 							 allows you to move branches from one part of the graph to another.</p>
 					</section>
 					<section>
+						<h3>For example, move feature1</h3>
+						<p><canvas id="graph-example-rebase-start"></canvas></p>
+					</section>
+					<section>
+						<h3>somewhere else</h3>
+						<p><canvas id="graph-example-rebase-end"></canvas></p>
+					</section>
+					<section>
 						<h3>But wait...</h3>
 						<p><span class="git-color">Git</span> commits are immutable,
 							and they encode their parent's sha1...</p>
@@ -294,8 +302,16 @@ $ git reset
 					</section>
 					<section>
 						<h3>Rebase actually creates new commits</h3>
-						<p>When you rebase, you actually
+						<p>When you rebase, you replicate the diffs ontop of a different commit</p>
+						<p><canvas id="graph-example-rebased"></canvas></p>
 					</section>
+					<section>
+						<h3>The old commits still exist</h3>
+						<p><canvas id="graph-example-rebased-hidden"></canvas></p>
+					</section>
+					<section>
+						<h3>Where do the old commits go?</h3>
+						<p>Commits not pointed to by any refs are automatically hidden and eventually garbage collected.</p>
 				</section>
 
 				<section>
@@ -463,46 +479,70 @@ $ git reset
 					master.commit("H");
 					develop.merge(master, "I");
 				}());
-			});
-			// Commits example
-			(function() {
+				(function() {
 					var git_graph = new GitGraph({
-						elementId: 'graph-example-commits',
+						elementId: 'graph-example-rebase-start',
 						reverseArrow: true,
-						template: named_graph_big,
-						orientation: 'horizontal',
-						mode: 'compact'
-					});
-
-					var master = git_graph.branch("master");
-					master.commit("C0").commit("C1").commit("C2").commit("C3");
-			}());
-			(function() {
-					var git_graph = new GitGraph({
-						elementId: 'graph-example-branch',
-						reverseArrow: true,
-						template: named_graph_big,
-						orientation: 'horizontal',
-						mode: 'compact'
-					});
-
-					var master = git_graph.branch("master");
-					master.commit("C0").commit("C1").commit({message: "C2", showLabel: true});
-			}());
-			(function() {
-					var git_graph = new GitGraph({
-						elementId: 'graph-example-merge',
-						reverseArrow: true,
-						template: named_graph_big,
+						template: named_graph_bezier,
 						orientation: 'horizontal'
+						// mode: 'compact'
 					});
 
 					var master = git_graph.branch("master");
-					master.commit("C0");
-					var development = master.branch("development");
-					development.commit("C1");
-					development.merge(master, {message: "C3", showLabel: true});
-			}());
+					master.commit("A").commit("B");
+					var feature = master.branch("feature1");
+					feature.commit("C").commit("D");
+					master.commit("E").commit({message: "G", showLabel: true});
+					feature.commit({message: "F", showLabel: true});
+				}());
+				(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-rebase-end',
+						reverseArrow: true,
+						template: named_graph_bezier,
+						orientation: 'horizontal'
+						// mode: 'compact'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("A").commit("B").commit("E").commit({message: "G", showLabel: true});
+					var feature = master.branch("feature1");
+					feature.commit("C").commit("D").commit({message: "F", showLabel: true});
+				}());
+				(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-rebased',
+						reverseArrow: true,
+						template: named_graph_bezier,
+						orientation: 'horizontal'
+						// mode: 'compact'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("A").commit("B").commit({message: "G", showLabel: true});
+					var feature = master.branch("feature1");
+					feature.commit("C'").commit("D'").commit({message: "F'", showLabel: true});
+				}());
+				(function() {
+					var git_graph = new GitGraph({
+						elementId: 'graph-example-rebased-hidden',
+						reverseArrow: true,
+						template: named_graph_bezier,
+						orientation: 'horizontal'
+						// mode: 'compact'
+					});
+
+					var master = git_graph.branch("master");
+					master.commit("A").commit("B");
+					var old_feature = master.branch("feature1 (old)");
+					old_feature.commit("C").commit("D");
+					master.commit("E");
+					old_feature.commit("F");
+					master.commit({message: "G", showLabel: true});
+					var feature = master.branch("feature1");
+					feature.commit("C'").commit("D'").commit({message: "F'", showLabel: true});
+				}());
+			});
 		</script>
 	</body>
 </html>
