@@ -34,7 +34,7 @@
 				<section>
 					<img width="200" height="200" src='img/git-icon.png' style="background:none;border:none;box-shadow:none">
 					<h1>Advanced <span class="git-color">Git</span></h1>
-					<h3>Understanding the graph, commits and other mysteries you never knew you wanted to know</h3>
+					<h3>Understanding the graph, commits and other mysteries you never knew you wanted to know - in a format for massive nerds.</h3>
 					<h4><span class="git-color">Matt Hooks / Greg Bowser</span></h4>
 				</section>
 
@@ -61,6 +61,63 @@
 					<h3>97f341d10392085d981353457def1f4dc06b9d93</h3>
 					<p>Every commit in <span class="git-color">Git</span> is identified by a sha1 hash.</p>
 					<p>For our purposes, we're going to refer to commits by letter names (A, B, C, etc)</p>
+				</section>
+
+				<section>
+					<section>
+						<h3>2-minute <span class="git-color">Git</span> crash course
+					</section>
+					<section>
+						<h3>Getting a repository</h3>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
+$ git clone url
+						</code></pre></p>
+					</section>
+					<section>
+						<h3>Committing changes</h3>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
+$ git add filename.txt; git commit
+						</code></pre></p>
+					</section>
+					<section>
+						<h3>Receiving changes</h3>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
+$ git pull
+						</code></pre></p>
+						<br>
+						<h3>Sharing changes</h3>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
+$ git push
+						</code></pre></p>
+					</section>
+					<section>
+						<h3>Making a new branch</h3>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
+$ git branch name-of-branch
+						</code></pre></p>
+						<br>
+						<h3>Switching branches</h3>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
+$ git checkout name-of-branch
+						</code></pre></p>
+					</section>
+					<section>
+						<h3>What happens if I _____?</h3>
+						<p>Almost every operation in <span class="git-color">Git</span> is local.</p>
+						<ul>
+							<li><strong>committing</strong> is local</li>
+							<li><strong>branching</strong> is local</li>
+							<li><strong>checking history</strong> is local</li>
+							<li><strong>reverting</strong> is local</li>
+						</ul>
+						<p>Your changes become public (and effectively permanent) when you <strong>push</strong>.</p>
+					</section>
 				</section>
 
 				<section>
