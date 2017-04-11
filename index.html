@@ -176,6 +176,62 @@ $ git checkout name-of-branch
 							<li>When branches are just pointers, they can be created intantly,
 							which is great (assuming you like branches).</li>
 						</ul>
+						<p>Once you understand the <span class="git-color">Git</span> graph,
+							 the tool becomes simple and intuitive.</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>The Art of <span style="text-decoration:line-through">War</span> Committing</h3>
+						<p>In <span class="git-color">Git</span>, you stage files before committing them.</p>
+					</section>
+					<section>
+						<h3>HEAD and INDEX</h3>
+						<p>There are three “active” versions of every file in
+							<span class="git-color">Git</span>:</p>
+						<ul>
+							<li>The file in the working directory (your unsaved changes)</li>
+							<li>The file added to the INDEX (files you've marked for commit)</li>
+							<li>The file committed to HEAD (the file as it was last comitted)</li>
+					</section>
+					<section>
+						<h3>The <span class="git-color">Git</span> workflow</h3>
+						<p>Files move from your <em>working directory</em>, to the <em>INDEX</em>,
+							then become your new <em>HEAD</em>.
+					</section>
+					<section>
+						<h3>You can inspect your INDEX any time with</h3>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
+$ git status
+						</code></pre></p>
+					</section>
+					<section>
+						<pre style="padding:1em;font-size:90%">
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   file1.py
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   file1.py
+						</pre>
+					</section>
+					<section>
+						<h3>What <span class="git-color">Git</span> reset <em>resets</em></h3>
+						<p>"<span class="git-color">Git</span> is flexible": You can move
+							the HEAD and INDEX at will with</p>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
+$ git status
+						</code></pre></p>
 					</section>
 				</section>
 
