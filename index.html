@@ -269,6 +269,14 @@ $ git reset
 						<p><code>master</code> (<code>C6</code>) has two parents.</p>
 					</section>
 					<section>
+						<p>Note: <strong>New branches are not new commits</strong>
+						<p>If you start a new branch from <strong>master</strong> called
+							<strong>feature1</strong>, then <strong>feature1</strong> has not
+							diverged from <strong>master</strong> until you commit to one of
+							them.</p>
+							<img src="img/basic-branching-2.png">
+					</section>
+					<section>
 						<h3>Why do I want abstract math in my version control?</h3>
 						<ul>
 							<li>Because commits are nodes on a graph, you can "move" those
@@ -320,6 +328,11 @@ $ git reset
 						<h3>Rebase actually creates new commits</h3>
 						<p>When you rebase, you replicate the diffs ontop of a different commit</p>
 						<p><canvas id="graph-example-rebased"></canvas></p>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:left;padding-left:1em">
+$ git checkout feature1
+$ git rebase master
+						</code></pre></p>
 					</section>
 					<section>
 						<h3>The old commits still exist</h3>
