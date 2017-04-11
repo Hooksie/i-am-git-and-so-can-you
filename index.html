@@ -130,6 +130,23 @@ $ git checkout name-of-branch
 						<p><span class="git-color">Git</span> generally doesn't care if you
 							provide a raw sha1 or a ref. In most cases, they imply the same meaning.</p>
 					</section>
+					<section>
+						<h3>Remote refs</h3>
+						<p>In additional to local refs (such as local branches), cloning a
+							repo provides a copy of the remote repos refs, under a different
+							"remotes" namespace".</p>
+						</section>
+						<section>
+							<h3>Gone but not forgotten</h3>
+							<p>In fact, after cloning a repo, <span class="git-color">Git</span>
+								maintains knowledge of the source url and tracks that repo as a
+								"remote".</p>
+						</section>
+						<section>
+							<p><span class="git-color">Git</span> uses the remote when
+								running <strong>git push</strong> or <strong>git pull</strong>
+								commands.</p>
+							</section>
 				</section>
 
 				<section>
@@ -265,7 +282,6 @@ $ git reset
 					</section>
 				</section>
 
-
 				<section>
 					<section>
 						<h3>Understanding merge vs rebase</h3>
@@ -312,14 +328,71 @@ $ git reset
 					<section>
 						<h3>Where do the old commits go?</h3>
 						<p>Commits not pointed to by any refs are automatically hidden and eventually garbage collected.</p>
+					</section>
 				</section>
 
 				<section>
-						<section>
-							<h3>The <span class="git-color">Git</span> Database</h3>
-							Commits, Trees and Blobs
-						</section>
+					<section>
+						<h3>Basics revisited</h3>
+						<p>Remember <strong>git pull</strong> and <strong>git push</strong>
+					</section>
+					<section>
+						<p><strong>git pull</strong> simply retrieves a remote repo's graph
+							and merges your local changes.</p>
+							<p><strong>git push</strong> simply pushes your graph, and updates
+								the remote refs to reflect your new commits.</p>
+					</section>
 				</section>
+
+				<section>
+					<section>
+						<h3><span class="git-color">Git</span> Internals</h3>
+						<p>Many <span class="git-color">Git</span> commands are implemented as shell scripts that call out to other git commands.</p>
+						<p>Some used to be shell scripts but have been ported to C.</p>
+						<p>Shell scripts: <strong>stash</strong>, <strong>rebase</strong>,
+							<strong>submodule</strong>, <strong>filter-branch</strong>,
+							<strong>bisect</strong></p>
+					</section>
+					<section>
+						<p>The Git internals are easily accessible via commands</p>
+						<p>Internal commands are referred to as “plumbing commands”</p>
+						<p>Example: <strong>git commit</strong> (not a shell script)</p>
+						<p style="text-align:center">
+						<pre><code class="bash" style="text-align:left;padding-left:2em">
+git write-tree
+# Prompt the user for a commit message
+git commit-tree
+						</code></pre></p>
+						<div></p>
+					</section>
+					<section>
+						<h3>The database, objects and you</h3>
+						<p>Every object Git stores gets put in the Git database, including:</p>
+							<ul>
+								<li>commits</li>
+								<li>blobs (files)</li>
+								<li>trees</li>
+								<li>annotated tags</li>
+							</ul>
+
+							<p>Exception: LFS (stores pointers)</p>
+					</section>
+					<section>
+						<p><span class="git-color">Git</span>'s database is a simple
+							key-value filesystem identified by a sha1 hashes.</p>
+						<p></strong>.git/objects</strong>: each subdirectory is the
+							first byte of a sha1.</p>
+						<p>Each file in the subdirectories is the remainder of the sha1.</p>
+						<p>Exception: packed objects are stored as deltas in a packfile.</p>
+					</section>
+					<section>
+						<p>Every object is stored using the same basic format:</p>
+						<p><strong>zlib_compress([type of object][space][size of object][NUL][object content])</strong></p>
+						<p>Header is all ASCII strings</p>
+						<p>Hash is the SHA1 of the content before compression</p>
+					</section>
+				</section>
+
 			</div>
 		</div>
 
