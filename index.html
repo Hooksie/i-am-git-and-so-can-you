@@ -135,18 +135,21 @@ $ git checkout -b name-of-branch
 						<h3>Hashes vs refs</h3>
 						<p><span class="git-color">Git</span> generally doesn't care if you
 							provide a raw sha1 or a ref. In most cases, they imply the same meaning.</p>
+						<p>Branches and tags are all refs in <span class="git-color">Git</span>.</p>
 					</section>
 					<section>
 						<h3>Remote refs</h3>
 						<p>In additional to local refs (such as local branches), cloning a
 							repo provides a copy of the remote repos refs, under a different
-							"remotes" namespace".</p>
+							"remotes" namespace.</p>
 						</section>
 						<section>
 							<h3>Gone but not forgotten</h3>
 							<p>In fact, after cloning a repo, <span class="git-color">Git</span>
 								maintains knowledge of the source url and tracks that repo as a
 								"remote".</p>
+								<p>When you collaborate on a branch, your local branch has
+									metadata associating it with the remote ref.</p>
 						</section>
 						<section>
 							<p><span class="git-color">Git</span> uses the remote when
