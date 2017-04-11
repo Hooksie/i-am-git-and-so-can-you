@@ -174,7 +174,9 @@ $ git checkout -b name-of-branch
 					</section>
 					<section>
 						<p>The INDEX is simply what your next commit will contain.</p>
-						<p>HEAD is whatever commit will be the parent of your next commit.</p>
+						<p>HEAD is whatever commit will be the parent of your next commit,
+							the last commit you checkout out, and the branch your next
+							commit will be added to.</p>
 					</section>
 					<section>
 						<h3>The <span class="git-color">Git</span> workflow</h3>
@@ -291,7 +293,7 @@ $ git reset
 							<li>Because commits are nodes on a graph, you can "move" those
 								nodes when you want to reorganize your work, and better
 								organize your patch before sharing it with the team.</li>
-							<li>When branches are just pointers, they can be created intantly,
+							<li>When branches are just pointers, they can be created instantly,
 							which is great (assuming you like branches).</li>
 						</ul>
 						<p>Once you understand the <span class="git-color">Git</span> graph,
