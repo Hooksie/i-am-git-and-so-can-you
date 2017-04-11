@@ -58,12 +58,6 @@
 				</section>
 
 				<section>
-					<h3>97f341d10392085d981353457def1f4dc06b9d93</h3>
-					<p>Every commit in <span class="git-color">Git</span> is identified by a sha1 hash.</p>
-					<p>For our purposes, we're going to refer to commits by letter names (A, B, C, etc)</p>
-				</section>
-
-				<section>
 					<section>
 						<h3>2-minute <span class="git-color">Git</span> crash course
 					</section>
@@ -119,6 +113,25 @@ $ git checkout name-of-branch
 						<p>Your changes become public (and effectively permanent) when you <strong>push</strong>.</p>
 					</section>
 				</section>
+
+				<section>
+					<section>
+						<h3>97f341d10392085d981353457def1f4dc06b9d93</h3>
+						<p>Every commit in <span class="git-color">Git</span> is identified by a sha1 hash.</p>
+						<!-- <p>For our purposes, we're going to refer to commits by letter names (A, B, C, etc)</p> -->
+					</section>
+					<section>
+						<h3>Making hashes easier</h3>
+						<p>Instead of remembering sha1 hashes, we can use pointers, which
+							<span class="git-color">Git</span> calls "references", or more often, "refs".
+					</section>
+					<section>
+						<h3>Hashes vs refs</h3>
+						<p><span class="git-color">Git</span> generally doesn't care if you
+							provide a raw sha1 or a ref. In most cases, they imply the same meaning.</p>
+					</section>
+				</section>
+
 
 				<section>
 					<section>
@@ -192,8 +205,12 @@ $ git checkout name-of-branch
 							<span class="git-color">Git</span>:</p>
 						<ul>
 							<li>The file in the working directory (your unsaved changes)</li>
-							<li>The file added to the INDEX (files you've marked for commit)</li>
+							<li>The file added to the INDEX (files you've staged for commit)</li>
 							<li>The file committed to HEAD (the file as it was last comitted)</li>
+					</section>
+					<section>
+						<p>The INDEX is simply what your next commit will contain.</p>
+						<p>HEAD is whatever commit will be the parent of your next commit.</p>
 					</section>
 					<section>
 						<h3>The <span class="git-color">Git</span> workflow</h3>
@@ -225,13 +242,59 @@ Changes not staged for commit:
 						</pre>
 					</section>
 					<section>
+						<p><strong>Changes to be committed:</strong></p>
+						<p>The difference between the index and HEAD</p>
+						<p><strong>Changes not staged for commit:</strong></p>
+						<p>The difference between the working tree and the INDEX</p>
+					</section>
+					<section>
 						<h3>What <span class="git-color">Git</span> reset <em>resets</em></h3>
-						<p>"<span class="git-color">Git</span> is flexible": You can move
-							the HEAD and INDEX at will with</p>
+						<p>You can change HEAD and INDEX at will with</p>
 						<p style="text-align:center">
 						<pre><code class="bash" style="text-align:center;font-size:200%;overflow:hidden">
-$ git status
+$ git reset
 						</code></pre></p>
+					</section>
+					<section>
+						<ul>
+							<li><strong>git reset --soft</strong> will leave both the INDEX and working directory alone.
+							<li><strong>git reset --mixed</strong> (default) will clear your INDEX,
+								but leave your working directory alone.</li>
+							<li><strong>git reset --hard</strong> will clear your INDEX,
+								and match your working directory to HEAD</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Understanding merge vs rebase</h3>
+					</section>
+					<section>
+						<p>In <span class="git-color">Git</span>, there are two ways to
+							bring new code into your branch: <br>
+							<strong>merge</strong> and <strong>rebase</strong></p>
+						</section>
+					<section>
+						<h3>I've seen this trick before</h3>
+						<p><span class="git-color">Git</span> <strong>merge</strong> is simple:
+							combine the changes from one branch with another.</p>
+					</section>
+					<section>
+						<h3>Wibbly-wobbly <span class="git-color">Git</span> history</h3>
+						<p><span class="git-color">Git</span> <strong>rebase</strong>
+							 allows you to move branches from one part of the graph to another.</p>
+					</section>
+					<section>
+						<h3>But wait...</h3>
+						<p><span class="git-color">Git</span> commits are immutable,
+							and they encode their parent's sha1...</p>
+						<p>aka, you can't change a commit's parent,</p>
+						<p>aka, you can't actually move a branch.</p>
+					</section>
+					<section>
+						<h3>Rebase actually creates new commits</h3>
+						<p>When you rebase, you actually
 					</section>
 				</section>
 
