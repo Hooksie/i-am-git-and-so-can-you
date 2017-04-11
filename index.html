@@ -132,68 +132,6 @@ $ git checkout name-of-branch
 					</section>
 				</section>
 
-
-				<section>
-					<section>
-						<h3><span class="git-color">Git</span> Graph Theory 101</h3>
-						<img src="img/graph-theory.png" style="background:none;border:none;box-shadow:none">
-					</section>
-					<section>
-						<h3><span class="git-color">Git</span> is a big graph</h3>
-						<p>Every commit in a <span class="git-color">Git</span> repo can be thought of as a node in a graph (because they all are).</p>
-						<p><canvas id="graph-example"></canvas></p>
-					</section>
-					<section>
-						<h3>Specifically, a <em>Directed Acyclic Graph</em></h3>
-						<p><canvas id="graph-example-parents"></canvas></p>
-						<h4>Let's break that down...</h4>
-						<div class="fragment">
-							<dl>
-								<dt>directed</dt>
-								<dd>
-									Parents commits are indicated by the direction of the edges.
-								</dd>
-							</dl>
-						</div>
-						<div class="fragment">
-							<dl>
-								<dt>acyclic</dt>
-								<dd>
-									Commits reference their ancestors, not their descendents.
-								</dd>
-							</dl>
-						</div>
-					</section>
-					<section>
-						<h3>Every time you commit, you add a new point to the graph, and that point references your last commit.</h3>
-						<img src="img/basic-commiting.png" style="padding:1em">
-					</section>
-					<section>
-						<h3>A branch is just a pointer to a commit</h3>
-						<!-- <p><canvas id="graph-example-branch"></canvas></p> -->
-						<img src="img/basic-branching-1.png" style="padding:1em">
-						<p><code>master</code> and <code>C6</code> are the exact same thing.
-					</section>
-					<section>
-						<h3>A merge is just a commit with multiple parents</h3>
-						<!-- <p><canvas id="graph-example-merge"></canvas></p> -->
-						<img src="img/basic-merging-2.png" style="padding:1em">
-						<p><code>master</code> (<code>C6</code>) has two parents.</p>
-					</section>
-					<section>
-						<h3>Why do I want abstract math in my version control?</h3>
-						<ul>
-							<li>Because commits are nodes on a graph, you can "move" those
-								nodes when you want to reorganize your work, and better
-								organize your patch before sharing it with the team.</li>
-							<li>When branches are just pointers, they can be created intantly,
-							which is great (assuming you like branches).</li>
-						</ul>
-						<p>Once you understand the <span class="git-color">Git</span> graph,
-							 the tool becomes simple and intuitive.</p>
-					</section>
-				</section>
-
 				<section>
 					<section>
 						<h3>The Art of <span style="text-decoration:line-through">War</span> Committing</h3>
@@ -265,6 +203,68 @@ $ git reset
 						</ul>
 					</section>
 				</section>
+
+				<section>
+					<section>
+						<h3><span class="git-color">Git</span> Graph Theory 101</h3>
+						<img src="img/graph-theory.png" style="background:none;border:none;box-shadow:none">
+					</section>
+					<section>
+						<h3><span class="git-color">Git</span> is a big graph</h3>
+						<p>Every commit in a <span class="git-color">Git</span> repo can be thought of as a node in a graph (because they all are).</p>
+						<p><canvas id="graph-example"></canvas></p>
+					</section>
+					<section>
+						<h3>Specifically, a <em>Directed Acyclic Graph</em></h3>
+						<p><canvas id="graph-example-parents"></canvas></p>
+						<h4>Let's break that down...</h4>
+						<div class="fragment">
+							<dl>
+								<dt>directed</dt>
+								<dd>
+									Parents commits are indicated by the direction of the edges.
+								</dd>
+							</dl>
+						</div>
+						<div class="fragment">
+							<dl>
+								<dt>acyclic</dt>
+								<dd>
+									Commits reference their ancestors, not their descendents.
+								</dd>
+							</dl>
+						</div>
+					</section>
+					<section>
+						<h3>Every time you commit, you add a new point to the graph, and that point references your last commit.</h3>
+						<img src="img/basic-commiting.png" style="padding:1em">
+					</section>
+					<section>
+						<h3>A branch is just a pointer to a commit</h3>
+						<!-- <p><canvas id="graph-example-branch"></canvas></p> -->
+						<img src="img/basic-branching-1.png" style="padding:1em">
+						<p><code>master</code> and <code>C6</code> are the exact same thing.
+					</section>
+					<section>
+						<h3>A merge is just a commit with multiple parents</h3>
+						<!-- <p><canvas id="graph-example-merge"></canvas></p> -->
+						<img src="img/basic-merging-2.png" style="padding:1em">
+						<p><code>master</code> (<code>C6</code>) has two parents.</p>
+					</section>
+					<section>
+						<h3>Why do I want abstract math in my version control?</h3>
+						<ul>
+							<li>Because commits are nodes on a graph, you can "move" those
+								nodes when you want to reorganize your work, and better
+								organize your patch before sharing it with the team.</li>
+							<li>When branches are just pointers, they can be created intantly,
+							which is great (assuming you like branches).</li>
+						</ul>
+						<p>Once you understand the <span class="git-color">Git</span> graph,
+							 the tool becomes simple and intuitive.</p>
+					</section>
+				</section>
+
 
 				<section>
 					<section>
