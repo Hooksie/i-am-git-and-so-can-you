@@ -405,7 +405,39 @@ git commit-tree
 						<p>Hash is the SHA1 of the content before compression</p>
 					</section>
 				</section>
-
+				<section>
+					<section>
+						<h3>Useful <span class="git-color">Git</span> Commands</h3>
+					</section>
+					<section>
+						<h3>Interactive Add</h3>
+						<pre><code class="bash" style="text-align:left;padding-left:2em">
+git add -p
+						</code></pre>
+						<p><span class="git-color">Git</span> prompts you to stage each chunk individually.</p>
+						<p>If the chunk cannot be split any further, you can edit the patch.</p>
+					</section>
+					<section>
+						<h3>The <span class="git-color">Git</span> Reflog</h3>
+						<p><span class="git-color">Git</span> commits are never deleted immediately.</p>
+						<p>If you lose changes in a branch, the reflog records the branch's previous HEAD</p>
+						<pre><code class="bash" style="text-align:left;padding-left:2em">
+$ git reflog
+34d257b HEAD@{0}: merge master: Fast-forward
+3ec67f7 HEAD@{1}: checkout: moving from master to stable
+34d257b HEAD@{2}: commit (amend): [bootstrap] Update changelog and bump version to 1.11.4.
+4fb697b HEAD@{3}: commit: [bootstrap] Update changelog and bump version to 11.1.4.
+13d40fc HEAD@{4}: commit (amend): [bootstrap] Detect if virtualenv actually exists.
+						</code></pre>
+					</section>
+					<section>
+						<h3>Interactive Rebase</h3>
+						<p>When rebasing, interactive allows you to arbitrarily reorder, squash, or delete commits.</p>
+						<pre><code class="bash" style="text-align:left;padding-left:2em">
+git rebase -i master
+						</code></pre>
+					</section>
+				</section>
 			</div>
 		</div>
 
